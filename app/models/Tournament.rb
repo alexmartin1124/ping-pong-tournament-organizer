@@ -25,10 +25,6 @@ def run
   puts "Congratulations, #{round_winners[0].name}!"
 end
 
-def four_player_tournament
-  semi_finals
-  finals
-end
 
 def five_player_tournament
   bye
@@ -37,6 +33,11 @@ end
 def bye
   puts "#{player[0].name} has a bye and will move automatically to the next round."
   byed_player = players.shift
+end
+
+def four_player_tournament
+  semi_finals
+  finals
 end
 
 def eight_player_tournament
@@ -54,62 +55,77 @@ end
 
 
 def bracket_display
-  puts "PLAYER1 -------"
-  puts "               |--PLAYER1 -------"
-  puts "PLAYER2 -------                  |"
-  puts "                                 |--PLAYER1"        
-  puts "PLAYER3 -------                  |**WINNER**"
-  puts "               |--PLAYER3 -------"
-  puts "PLAYER4 -------"
+  puts "PLAYERA -------"
+  puts "               |--PLAYERA -------"
+  puts "PLAYERB -------                  |"
+  puts "                                 |--PLAYERA"        
+  puts "PLAYERC -------                  |"
+  puts "               |--PLAYERC -------"
+  puts "PLAYERD -------"
+  puts ""
+  puts "PLAYERE -------"
+  puts "               |--PLAYERE -------"
+  puts "PLAYERF -------                  |"
+  puts "                                 |--PLAYERE"        
+  puts "PLAYERG -------                  |"
+  puts "               |--PLAYERG -------"
+  puts "PLAYERH -------"
+  puts ""
+  puts "PLAYERI -------"
+  puts "               |--PLAYERI -------"
+  puts "PLAYERJ -------                  |"
+  puts "                                 |--PLAYERI"        
+  puts "PLAYERK -------                  |"
+  puts "               |--PLAYERK -------"
+  puts "PLAYERL -------"
+  puts ""
+  puts "PLAYERM -------"
+  puts "               |--PLAYERM -------"
+  puts "PLAYERN -------                  |"
+  puts "                                 |--PLAYERM"        
+  puts "PLAYERO -------                  |"
+  puts "               |--PLAYERO -------"
+  puts "PLAYERP -------"
 end
 
+
+
+def round(number_of_games)
+  x, y = 0, 1
+  number_of_games.times do 
+    game(players[x], players[y])
+    x+=2 
+    y+=2
+  end
+end
 
 def sweet_sixteen
   puts "SWEET SIXTEEN"
-  game(players[0], players[1])
-  game(players[2], players[3])
-  game(players[4], players[5])
-  game(players[6], players[7])
-  game(players[8], players[9])
-  game(players[10], players[11])
-  game(players[12], players[13])
-  game(players[14], players[15])
+  round(8)
   round_ender
-end
-
-def idk(number)
-  x, y = 0, 1
-  number.times do 
-    game(players[x], players[y])
-    x+=2 & y +=2
-  end
 end
 
 def elite_eight
   puts "ELITE EIGHT"
-  game(players[0], players[1])
-  game(players[2], players[3])
-  game(players[4], players[5])
-  game(players[6], players[7])
+  round(4)
   round_ender
 end
 
 def semi_finals
   puts "SEMIFINALS:"
-  game(players[0], players[1])
-  game(players[2], players[3])
+  round(2)
   round_ender
 end
 
 def finals
   puts "FINALS:"
-  game(players[0], players[1])
-  players.delete_if {|player| !round_winners.include?(player)}
+  round(1)
+  round_ender("finals")
 end
 
-def round_ender
+def round_ender(arg = nil)
   players.delete_if {|player| !round_winners.include?(player)}
-  round_winners.clear
+  round_winners.clear unless arg == "finals"
 end
 
 def get_user_input
@@ -135,7 +151,7 @@ def game(player1, player2)
 end
 
 #Find a way to at least view all matchups for a given round, if not 
-
+#Make a bracket name formatter
 
 
 end
